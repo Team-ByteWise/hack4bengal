@@ -200,6 +200,13 @@ Now you can visit the following phishing sites to test the extension:
 
 </details>
 
+## Usage
+
+1. Install all the required components using the automated or manual installation steps.
+2. Visit the phishing sites mentioned above to test the extension.
+3. As soon as you visit the phishing sites, the extension will detect it and redirect you to a warning page.
+4. You can click on the `Go to the real site` button on the warning page to redirect to the legitimate site.
+
 ## Disclaimer
 
 This project is for educational purposes only. The phishing sites are hosted locally and are not accessible to the public. The phishing sites are only for testing the extension and backend server. The phishing sites are not intended to be used for malicious purposes.
