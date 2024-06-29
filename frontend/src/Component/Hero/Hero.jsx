@@ -69,9 +69,9 @@ function Hero() {
         </motion.div>
         <span className=" mt-4 text-center text-[18px] text-[#1B134E] font-medium">
           Keep your internet use{" "}
-          <span className="font-bold text-[#4833cc]">safe and private</span> and
-          your devices running
-          <br /> smoothly with one of our award-winning, easy-to-use security
+          <span className="font-bold text-[#4833cc]">safe and private</span>and
+          your devices running
+          <br /> smoothly with one of our award-winning, easy-to-use security
           plans.
         </span>
       </div>
