@@ -3,10 +3,12 @@ import json
 
 from flask import Flask, request
 from flask_caching import Cache
+from flask_cors import CORS, cross_origin
 
 from bytewise import wiseshield
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['CACHE_TYPE'] = 'simple'
 cache = Cache(app)
@@ -17,11 +19,13 @@ def generate_cache_key(data):
     return f"wiseshield_cache_{key}"
 
 
+@cross_origin(origin='*')
 @app.route("/")
 def hello_world():
     return "<h1>Team ByteWise</h1><h3>WiseShield Ai Backend</h3>"
 
 
+@cross_origin(origin='*')
 @app.route("/check", methods=["POST"])
 def check_for_phishing_site():
     cache_key = generate_cache_key(request.get_json())
@@ -39,6 +43,7 @@ def check_for_phishing_site():
     return response
 
 
+@cross_origin(origin='*')
 @app.route("/train", methods=["POST"])
 def train_model():
     data = request.get_json()
