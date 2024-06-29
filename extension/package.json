@@ -1,7 +1,7 @@
 {
   "name": "wiseshield-ai",
-  "version": "0.1.0",
-  "description": "My Chrome Extension",
+  "version": "1.0.0",
+  "description": "WiseShield Ai is a browser extension that protects you from fake and harmful websites.",
   "private": true,
   "scripts": {
     "watch": "node ./node_modules/webpack/bin/webpack.js --mode=development --watch --config config/webpack.config.js",

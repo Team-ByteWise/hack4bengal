@@ -1,19 +1,11 @@
-# <img src="public/icons/icon_48.png" width="45" align="left"> Ef
-
-My Chrome Extension
+# <img src="public/icons/icon_48.png" width="45" align="left"> &nbsp; WiseShield Ai (Chrome Extension)
 
 ## Features
 
-- Feature 1
-- Feature 2
+- Detect Fake/Phishing Sites
+- Show warning whenever a fake/phishing site is encountered
 
-## Install
-
-[**Chrome** extension]()
-
-## Contribution
-
-Suggestions and pull requests are welcomed!.
+### Created at Hack4Bengal 3.0
 
 ---
 
