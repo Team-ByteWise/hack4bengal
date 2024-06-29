@@ -36,6 +36,16 @@ WiseShield AI is a comprehensive security solution designed to safeguard users f
 
 The script will install the required dependencies and start the backend server, frontend website, serve some phishing websites for test and open a chrome window with the extension pre installed with phishing sites and their legitimate versions for testing.
 
+- The frontend Web Application can be accessed at [http://localhost:5173](http://localhost:5173)
+- The backend API can be accessed at [http://localhost:5000](http://localhost:5000)
+- The phishing sites can be accessed at the following URLs:
+    - [Amazon Login (Fake)](https://www.amz.localhost/amz)
+    - [Google Login (Fake)](https://accounts.google.localhost/google)
+    - [Facebook Login (Fake)](https://www.fb.localhost/fb)
+    - [LinkedIn Login (Fake)](https://www.linkedin.localhost/linkedin)
+    - [Instagram Login (Fake)](https://www.ig.localhost/ig)
+    - [Snapchat Login (Fake)](https://accounts.snap.localhost/snap)
+
 <details>
   <summary>Manual Installation</summary>
 
