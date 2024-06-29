@@ -1,8 +1,19 @@
-# React + Vite
+# WiseShield Ai Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies used
 
-Currently, two official plugins are available:
+- [React](https://react.dev)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [React Router](https://reactrouter.com/)
+- [PostCSS](https://postcss.org/)
+- [ESLint](https://eslint.org/)
+- [Autoprefixer](https://autoprefixer.github.io/)
+- [Axios](https://axios-http.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+
+### Created at Hack4Bengal 3.0
+
+### By Team ByteWise
