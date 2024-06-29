@@ -214,6 +214,7 @@ This project is for educational purposes only. The phishing sites are hosted loc
 ## Third Party Resources Used
 
 - [Evilginx](https://github.com/kgretzky/evilginx2/) for testing phishing sites
+- [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli) to bootstrap the Chrome Extension
 
 
 ## Third Party Libraries Used
