@@ -17,7 +17,13 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "storage"
+    "notifications",
+    "webRequest",
+    "storage",
+    "declarativeNetRequest",
+    "activeTab",
+    "scripting",
+    "tabs"
   ],
   "content_scripts": [
     {
@@ -27,6 +33,16 @@
       "run_at": "document_idle",
       "js": [
         "contentScript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "images/*"
+      ],
+      "matches": [
+        "<all_urls>"
       ]
     }
   ]
