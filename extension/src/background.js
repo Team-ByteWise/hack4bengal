@@ -1,21 +1,63 @@
-'use strict';
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.storage.local.set({ isActive: true });
+});
 
-// With background scripts you can communicate with popup
-// and contentScript files.
-// For more information on background script,
-// See https://developer.chrome.com/extensions/background_pages
-
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'GREETINGS') {
-    const message = `Hi ${
-      sender.tab ? 'Con' : 'Pop'
-    }, my name is Bac. I am from Background. It's great to hear from you.`;
-
-    // Log message coming from the `request` parameter
-    console.log(request.payload.message);
-    // Send a response message
-    sendResponse({
-      message,
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area === "local" && "isActive" in changes) {
+    chrome.tabs.query({}, (tabs) => {
+      tabs.forEach((tab) => {
+        chrome.tabs
+          .sendMessage(tab.id, {
+            action: "updateStatus",
+            isActive: changes.isActive.newValue,
+          })
+          .catch((error) => {});
+      });
     });
   }
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "logPageData") {
+    const url = new URL(message.url);
+    const baseUrl = url.origin + url.pathname;
+
+    fetch("http://localhost:5000/check", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        url: message.url,
+        content: message.content,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+
+        if (data.status === "error") {
+          console.error("Error:", data.error);
+          return;
+        }
+
+        const statusData = {};
+        statusData[baseUrl] = data;
+        chrome.storage.local.set(statusData, () => {
+          chrome.runtime
+            .sendMessage({
+              action: "updatePopup",
+              data: data,
+              url: baseUrl,
+            })
+            .catch((error) => {});
+
+          // TODO: Redirect to Warning Site
+        });
+      })
+      .catch((error) => {
+        console.log("ERROR:", "Backend server is not running");
+      });
+  }
+  return true;
 });
