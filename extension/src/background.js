@@ -52,7 +52,22 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             })
             .catch((error) => {});
 
-          // TODO: Redirect to Warning Site
+          if (data.status === "fake") {
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+              const fakeUrl = chrome.runtime.getURL("warning.html");
+              const url = new URL(message.url);
+              const baseUrl = url.origin + url.pathname;
+
+              const encodedFakeSiteUrl = btoa(baseUrl);
+              const encodedRealSiteUrl = btoa(data.real_url);
+              const encodedRealDomain = btoa(data.real_domain);
+              const encodedProbability = btoa(
+                Math.round(data.probability * 100).toString()
+              );
+              const fakePageUrl = `${fakeUrl}?fakeSiteUrl=${encodedFakeSiteUrl}&probability=${encodedProbability}&realDomain=${encodedRealDomain}&realSiteUrl=${encodedRealSiteUrl}`;
+              chrome.tabs.update(tabs[0].id, { url: fakePageUrl });
+            });
+          }
         });
       })
       .catch((error) => {

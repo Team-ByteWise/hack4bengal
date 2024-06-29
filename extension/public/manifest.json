@@ -39,6 +39,22 @@
   "web_accessible_resources": [
     {
       "resources": [
+        "warning.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "resources": [
+        "warning.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "resources": [
         "images/*"
       ],
       "matches": [
