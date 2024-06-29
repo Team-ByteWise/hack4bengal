@@ -1,4 +1,4 @@
-let idx = 0;
+let isExtensionActive = true;
 
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.getElementById("Body");
@@ -43,33 +43,66 @@ document.addEventListener("DOMContentLoaded", () => {
     enable.src = "images/power_on.png";
   };
 
-  const closePopUp = () => {
+  close.addEventListener("click", () => {
     window.close();
-  };
+  });
+
+  chrome.storage.local.get(["isActive"], (result) => {
+    isExtensionActive = result.isActive !== false;
+    updateUI();
+  });
+
+  enable.addEventListener("click", () => {
+    isExtensionActive = !isExtensionActive;
+    chrome.storage.local.set({ isActive: isExtensionActive }, () => {
+      updateUI();
+    });
+  });
 
   function updateUI() {
-    if (++idx >= 4) idx = 0;
-
-    switch (idx) {
-      case 0:
-        safeSite();
-        break;
-      case 1:
-        scanningSite();
-        break;
-      case 2:
-        unsafeSite();
-        break;
-      case 3:
-        disableExtension();
-        break;
+    if (isExtensionActive) {
+      scanningSite();
+      reQuery();
+    } else {
+      disableExtension();
     }
   }
 
-  enable.addEventListener("click", () => {
-    updateUI();
-  });
-  close.addEventListener("click", () => {
-    closePopUp();
-  });
+  function updatePopup(data) {
+    if (data.status === "real") {
+      safeSite();
+    } else if (data.status === "fake") {
+      unsafeSite();
+    }
+  }
+
+  function reQuery() {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      const currentTab = tabs[0];
+      const url = new URL(currentTab.url);
+      const baseUrl = url.origin + url.pathname;
+
+      chrome.storage.local.get([baseUrl], (result) => {
+        if (result[baseUrl] && isExtensionActive) {
+          updatePopup(result[baseUrl]);
+        }
+      });
+
+      chrome.runtime.sendMessage(
+        { action: "requestLatestData", url: baseUrl },
+        (response) => {
+          if (response && isExtensionActive) updatePopup(response);
+        }
+      );
+    });
+
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      if (message.action === "updatePopup") {
+        console.log("Message received from background:", message.data);
+        if (isExtensionActive) updatePopup(message.data);
+      }
+      return true;
+    });
+  }
+  reQuery();
 });
