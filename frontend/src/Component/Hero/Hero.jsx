@@ -57,13 +57,12 @@ function Hero() {
   };
 
   return (
-    <div className="home bg-gradient-to-b h-screen  from-[#aea0ff] from-20% via-[#C7BFF0] via-60%  to-[#fbe7ff] to-900%">
-      <Navbar />
-      <div className="mt-[120px] flex flex-col justify-center items-center">
+    <div className="home h-screen bg-gradient-to-b   from-[#aea0ff] from-20% via-[#C7BFF0] via-60%  to-[#fbe7ff] to-900%">
+      <div className="pt-[120px] flex flex-col justify-center items-center">
         <motion.div
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="bg-clip-text font-bold text-[80px] text-center text-transparent bg-gradient-to-r from-[#4E37D9] from-20% via-[#4C3EA0] to-[#19114B] to-90%"
+          className=" font-bold text-[80px] bg-clip-text text-center text-transparent bg-gradient-to-r from-[#4E37D9] from-20% via-[#4C3EA0] to-[#19114B] to-90%"
         >
           Phishing Prohibited,
           <br /> Fishing Allowed

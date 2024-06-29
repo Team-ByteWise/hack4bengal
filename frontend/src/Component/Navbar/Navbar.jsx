@@ -1,35 +1,36 @@
 import React from "react";
 import Logo from "../Logo/Logo";
-import "../Navbar/style.css"
+import "../Navbar/style.css";
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
     <header>
-      <nav className="flex items-center justify-between p-10">
+      <nav className="flex items-center justify-between py-10 bg-[#aea0ff]">
         <div className="w-3/12 flex items-center justify-center">
           <Logo />
         </div>
         <div className="w-7/12 flex flex-shrink justify-evenly items-center gap-x-11">
-          <a
-            href="#home"
+          <NavLink
+            to="/"
             className=" link no-underline text-lg  font-medium  text-[#2b1f6f]"
           >
             Home
-          </a>
-          <a
-            href="#site"
+          </NavLink>
+          <NavLink
+            to="/site"
             className="no-underline text-lg  font-medium  text-[#2b1f6f] link"
           >
             Site Knowledge
-          </a>
+          </NavLink>
 
-          <a
-            href="#"
+          <NavLink
+            to="/team"
             className="no-underline text-lg  font-medium  text-[#2b1f6f] link"
           >
-            Contact us
-          </a>
+            Our Team
+          </NavLink>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
