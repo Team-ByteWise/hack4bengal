@@ -1,0 +1,20 @@
+{
+  "name": "wiseshield-ai",
+  "version": "1.0.0",
+  "description": "WiseShield Ai is a browser extension that protects you from fake and harmful websites.",
+  "private": true,
+  "scripts": {
+    "watch": "node ./node_modules/webpack/bin/webpack.js --mode=development --watch --config config/webpack.config.js",
+    "build": "node ./node_modules/webpack/bin/webpack.js --mode=production --config config/webpack.config.js"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^6.4.1",
+    "css-loader": "^6.11.0",
+    "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^0.10.1",
+    "size-plugin": "^2.0.2",
+    "webpack": "^5.92.1",
+    "webpack-cli": "^4.10.0",
+    "webpack-merge": "^5.10.0"
+  }
+}

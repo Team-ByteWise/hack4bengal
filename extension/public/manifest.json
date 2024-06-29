@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "WiseShield Ai",
+  "version": "1.0.0",
+  "description": "WiseShield Ai is a browser extension that protects you from fake and harmful websites.",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "32": "icons/icon_32.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "WiseShield Ai",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "notifications",
+    "webRequest",
+    "storage",
+    "declarativeNetRequest",
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentScript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "warning.html"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "resources": [
+        "warning.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "resources": [
+        "images/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
