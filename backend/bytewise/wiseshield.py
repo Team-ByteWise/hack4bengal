@@ -99,14 +99,6 @@ def get_features_from_site(real_sites: list[str]) -> list[dict[str, str]]:
 def check_similarity(url: str, content: str) -> dict[str, str]:
     vectorizer = joblib.load('data/tfidf_vectorizer_real_site_probability.pkl')
     real_sites_df = pandas.read_pickle('data/real_sites_features_probability.pkl')
-
-    visiting_domain = get_main_domain(url)
-
-    # If the visiting domain is already in the real sites, it is 100% real
-    if visiting_domain in real_sites_df['domain'].values:
-        return {"status": "real", "real_domain": visiting_domain, "real_url": url,
-                "probability": 1.0}
-
     real_sites_tfidf = vectorizer.fit_transform(real_sites_df['content'])
 
     features = extract_features(url, content)
