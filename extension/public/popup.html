@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div
+      class="h-[450px] w-[350px] bg-transparent flex justify-center items-center"
+    >
+      <div id="Body" class="h-[450px] w-[350px] rounded-md bg-[#C8FFDB]">
+        <div class="h-[30px] absolute m-3">
+          <button id="close">
+            <img
+              src="images/close.png"
+              class="h-[15px] relative right-0"
+              alt=""
+            />
+          </button>
+        </div>
+        <div class="flex flex-col justify-center mt-4 gap-5">
+          <div class="flex items-center flex-col gap-16">
+            <div class="h-[15px] mt-7 flex flex-col">
+              <span class="font-extrabold text-2xl"
+                >WiseShield
+                <span
+                  class="bg-clip-text text-transparent bg-gradient-to-r from-[#3196DC] to-[#9068C1]"
+                  >AI</span
+                ></span
+              >
+              <div class="absolute flex justify-end w-[145px]">
+                <img
+                  src="images/google-gemini-icon.png"
+                  class="relative h-[15px] top-[-8px] right-[-32px]"
+                  alt=""
+                />
+              </div>
+              <span class="text-xs text-right">Secured by AI</span>
+            </div>
+            <img
+              id="head_img"
+              src="images/safe.png"
+              class="h-[150px] w-[150px]"
+              alt=""
+            />
+          </div>
+          <div class="text-center h-[66px]">
+            <span
+              id="head_text"
+              class="text-[#20BF55] font-extrabold text-center text-2xl"
+            >
+              Enjoy Safe Browsing
+            </span>
+          </div>
+
+          <div class="flex flex-col items-center gap-5">
+            <div class="flex gap-x-7">
+              <button>
+                <img id="enable" src="images/power_on.png" class="h-[30px]" />
+              </button>
+            </div>
+            <div class="flex items-center gap-1">
+              <img src="images/copyright.png" class="h-[10px]" alt="" />
+              <span class="text-[10px]">2024 ByteWise | Hack4Bengal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

