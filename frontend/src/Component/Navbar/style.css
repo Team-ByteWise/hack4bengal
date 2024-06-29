@@ -1,0 +1,22 @@
+.link {
+    position: relative;
+  }
+  
+  .link:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #2b1f6f;
+    transition: width 0.2s ease;
+    -webkit-transition: width 0.2s ease;
+  }
+  
+  .link:hover:after {
+    width: 100%;
+    left: 0;
+    background:#2b1f6f;
+  }
