@@ -46,7 +46,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-black py-2 mt-16 text-white flex justify-center">
+      <div className="bg-[#8f7bff] py-2 mt-16 text-black font-semibold flex justify-center">
         <span>©️ 2024 ByteWise | Hack4Bengal</span>
       </div>
     </footer>
