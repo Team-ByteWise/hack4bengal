@@ -1,43 +1,111 @@
-'use strict';
-
-// Content script file will run in the context of web page.
-// With content script you can manipulate the web pages using
-// Document Object Model (DOM).
-// You can also pass information to the parent extension.
-
-// We execute this script by making an entry in manifest.json file
-// under `content_scripts` property
-
-// For more information on Content Scripts,
-// See https://developer.chrome.com/extensions/content_scripts
-
-// Log `title` of current active web page
-const pageTitle = document.head.getElementsByTagName('title')[0].innerHTML;
-console.log(
-  `Page title is: '${pageTitle}' - evaluated by Chrome extension's 'contentScript.js' file`
-);
-
-// Communicate with background file by sending a message
-chrome.runtime.sendMessage(
-  {
-    type: 'GREETINGS',
-    payload: {
-      message: 'Hello, my name is Con. I am from ContentScript.',
-    },
-  },
-  response => {
-    console.log(response.message);
+function onDocumentReady(callback) {
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    callback();
+  } else {
+    document.addEventListener("DOMContentLoaded", callback);
   }
-);
+}
 
-// Listen for message
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.type === 'COUNT') {
-    console.log(`Current count is ${request.payload.count}`);
+function checkSensitiveFields() {
+  const forms = document.querySelectorAll("form");
+  let passwordFieldFound = false;
+  let keywordFound = false;
+  let usernameFieldFound = false;
+
+  forms.forEach((form) => {
+    if (form.querySelector('input[type="password"]')) {
+      passwordFieldFound = true;
+    }
+
+    const action = form.getAttribute("action") || "";
+    if (
+      action.includes("login") ||
+      action.includes("signin") ||
+      action.includes("signup")
+    ) {
+      keywordFound = true;
+    }
+
+    if (form.querySelector('input[type="text"][autocomplete="username"]')) {
+      usernameFieldFound = true;
+    }
+  });
+
+  if (passwordFieldFound || keywordFound || usernameFieldFound) {
+    const url = window.location.href;
+    const pageContent = document.documentElement.outerHTML;
+
+    chrome.runtime.sendMessage({
+      action: "logPageData",
+      url: url,
+      content: pageContent,
+    });
+  }
+}
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "updateStatus") {
+    if (message.isActive) {
+      checkSensitiveFields();
+    }
   }
 
-  // Send an empty response
-  // See https://github.com/mozilla/webextension-polyfill/issues/130#issuecomment-531531890
-  sendResponse({});
   return true;
+});
+
+onDocumentReady(() => {
+  chrome.storage.local.get(["isActive"], (result) => {
+    const isActive = result.isActive !== false;
+    if (isActive) {
+      checkSensitiveFields();
+
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              if (node.tagName === "INPUT" && node.type === "password") {
+                checkSensitiveFields();
+              } else {
+                const passwordFields = node.querySelectorAll(
+                  'input[type="password"]'
+                );
+                const usernameFields = node.querySelectorAll(
+                  'input[type="text"][autocomplete="username"]'
+                );
+                const forms = node.querySelectorAll("form");
+
+                let formContainsKeyword = false;
+                forms.forEach((form) => {
+                  const action = form.getAttribute("action") || "";
+                  if (
+                    action.includes("login") ||
+                    action.includes("signin") ||
+                    action.includes("signup")
+                  ) {
+                    formContainsKeyword = true;
+                  }
+                });
+
+                if (
+                  passwordFields.length > 0 ||
+                  usernameFields.length > 0 ||
+                  formContainsKeyword
+                ) {
+                  checkSensitiveFields();
+                }
+              }
+            }
+          });
+        });
+      });
+
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+    }
+  });
 });
