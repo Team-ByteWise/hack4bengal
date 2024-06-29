@@ -1,4 +1,11 @@
 import React from "react";
+import data from "../../Assets/data/site_knowledge.json";
+
+const truncate = (str, maxLength) => {
+  if (str.length <= maxLength) return str;
+  return str.slice(0, maxLength) + "...";
+};
+
 export default function BasicTable() {
   return (
     <div className=" py-[100px] overflow-x-auto bg-gradient-to-b  from-[#aea0ff] via-[#C7BFF0] via-500%  to-[#B0A5F1]">
@@ -8,51 +15,45 @@ export default function BasicTable() {
 
       <table className="w-4/6 m-auto border-collapse text-sm">
         <thead>
-          <tr className=" border-b   border-gray-600 bg-muted text-muted-foreground">
-            <th className="px-6 py-4 text-[20px] text-center font-medium">Site Name</th>
-            <th className="px-6 py-4 text-[20px] text-center font-medium">Sites</th>
+          <tr className=" border-b border-gray-600 bg-muted text-muted-foreground">
+            <th className="px-6 py-4 text-[20px] text-center font-medium">
+              Site Name
+            </th>
+            <th className="px-6 py-4 text-[20px] text-center font-medium">
+              Sites
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr className="border-b  border-gray-400  hover:bg-muted/40 active:bg-muted/60">
-            <td
-              className="px-6 py-4 border-r text-[17px] border-gray-400 font-medium text-center"
-              rowSpan="3"
-            >
-              Amazon
-            </td>
-            <td className="text-center px-6 text-[16px] py-4">www.amazon.com</td>
-          </tr>
-          <tr className="border-b border-gray-400 hover:bg-muted/40 active:bg-muted/60">
-            <td className="text-center px-6 py-4">www.amazon.in</td>
-          </tr>
-          <tr className="border-b border-gray-400 hover:bg-muted/40 active:bg-muted/60">
-            <td className="text-center px-6 py-4">www.amazon.co.uk</td>
-          </tr>
-          <tr className="border-b border-gray-400 hover:bg-muted/40 active:bg-muted/60">
-            <td
-              className="text-center border-r  border-gray-400 px-6 py-4 font-medium"
-              rowSpan="3"
-            >
-              Facebook
-            </td>
-            <td className="text-center px-6 py-4">www.facebook.com</td>
-          </tr>
-          <tr className=" border-b border-gray-400 hover:bg-muted/40 active:bg-muted/60">
-            <td className="text-center px-6 py-4">en-gb.facebook.com</td>
-          </tr>
-          <tr className="border-b border-gray-400 hover:bg-muted/40 active:bg-muted/60">
-            <td className="text-center px-6 py-4">in-hi.facebook.com</td>
-          </tr>
-          <tr className="border-b border-gray-400 hover:bg-muted/40 active:bg-muted/60">
-            <td
-              className=" text-center border-r  border-gray-400 px-6 py-4 font-medium"
-              rowSpan="3"
-            >
-              Instagram
-            </td>
-            <td className="text-center px-6 py-4">www.instagram.com</td>
-          </tr>
+          {Object.entries(data).map(([siteName, sites], index) => (
+            <React.Fragment key={index}>
+              {sites.map((site, siteIndex) => (
+                <tr
+                  key={siteIndex}
+                  className="border-b border-gray-400 hover:bg-muted/40 active:bg-muted/60"
+                >
+                  {siteIndex === 0 && (
+                    <td
+                      className="px-6 py-4 border-r text-[17px] border-gray-400 font-medium text-center"
+                      rowSpan={sites.length}
+                    >
+                      {siteName}
+                    </td>
+                  )}
+                  <td className="text-center px-6 py-4">
+                    <a
+                      href={site}
+                      className="text-blue-950 hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {truncate(site, 120)}
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </React.Fragment>
+          ))}
         </tbody>
       </table>
     </div>
