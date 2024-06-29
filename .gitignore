@@ -1,0 +1,11 @@
+chrome-data/
+
+evilginx/crt/
+evilginx/data.db
+evilginx/redirectors
+evilginx/phishlets/example.yaml
+evilginx/blacklist.txt
+evilginx/evilginx.exe
+evilginx/evilginx
+
+extension/size-plugin.json
