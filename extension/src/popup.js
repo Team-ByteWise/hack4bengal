@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     head_img.src = "images/safe.png";
     head_text.innerHTML = "This Site is Safe";
     head_text.style.color = "#20BF55";
-    enable.src = "images/poweron.png";
+    enable.src = "images/power_on.png";
   };
 
   const unsafeSite = () => {
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     head_img.src = "images/not_safe.png";
     head_text.innerHTML = "Phishing Detected";
     head_text.style.color = "#DA0000";
-    enable.src = "images/poweron.png";
+    enable.src = "images/power_on.png";
   };
 
   const disableExtension = () => {
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     head_img.src = "images/not_enable.png";
     head_text.innerHTML = "Click to Enable<br />WiseShield Ai";
     head_text.style.color = "#000000";
-    enable.src = "images/poweroff.png";
+    enable.src = "images/power_off.png";
   };
 
   const scanningSite = () => {
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     head_img.src = "images/scanning.png";
     head_text.innerHTML = "WiseShield Ai is Enabled";
     head_text.style.color = "#000000";
-    enable.src = "images/poweron.png";
+    enable.src = "images/power_on.png";
   };
 
   const closePopUp = () => {
