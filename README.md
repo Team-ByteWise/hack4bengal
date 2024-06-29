@@ -207,6 +207,7 @@ This project is for educational purposes only. The phishing sites are hosted loc
 - [PostCSS](https://postcss.org/)
 - [ESLint](https://eslint.org/)
 - [Autoprefixer](https://autoprefixer.github.io/)
+- [Axios](https://axios-http.com/)
 
 
 ### Backend
@@ -216,6 +217,7 @@ This project is for educational purposes only. The phishing sites are hosted loc
 - [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 - [Requests](https://docs.python-requests.org/en/master/)
 - [Flask-Caching](https://flask-caching.readthedocs.io/en/latest/)
+- [Flask-Cors](https://flask-cors.readthedocs.io/en/latest/)
 - [Jupyter](https://jupyter.org/)
 - [Joblib](https://joblib.readthedocs.io/en/latest/)
 - [Tldextract](https://tldextract.readthedocs.io/en/latest/)
