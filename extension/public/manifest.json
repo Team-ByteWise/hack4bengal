@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Ef",
+  "name": "WiseShield Ai",
   "$schema": "https://json.schemastore.org/chrome-manifest.json",
   "version": "0.1.0",
   "description": "My Chrome Extension",
@@ -14,7 +14,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Ef",
+    "default_title": "WiseShield Ai",
     "default_popup": "popup.html"
   },
   "permissions": [
