@@ -156,7 +156,7 @@ def check_similarity_using_url(url) -> dict[str, str | None]:
                 "error": "Could not fetch content"}
 
 
-def append_new_data(features: list[dict[str, int | str]]):
+def append_new_data(features: list[dict[str, int | str]]) -> bool:
     try:
         existing_data = pandas.read_pickle('data/real_sites_features_probability.pkl')
         print("Existing data loaded successfully.")
@@ -164,20 +164,25 @@ def append_new_data(features: list[dict[str, int | str]]):
         print("File not found. Initializing empty DataFrame.")
         existing_data = pandas.DataFrame()
 
-    new_data = pandas.DataFrame(features)
-    combined_data = pd.concat([existing_data, new_data], ignore_index=True)
+    try:
+        new_data = pandas.DataFrame(features)
+        combined_data = pd.concat([existing_data, new_data], ignore_index=True)
 
-    logi(f"Combined data shape: {combined_data.shape}")
-    logi(f"Combined data head: {combined_data.head()}")
+        logi(f"Combined data shape: {combined_data.shape}")
+        logi(f"Combined data head: {combined_data.head()}")
 
-    vectorizer = TfidfVectorizer(stop_words='english')
-    real_sites_tfidf = vectorizer.fit_transform(combined_data['content'])
+        vectorizer = TfidfVectorizer(stop_words='english')
+        real_sites_tfidf = vectorizer.fit_transform(combined_data['content'])
 
-    logi(f"TF-IDF shape: {real_sites_tfidf.shape}")
+        logi(f"TF-IDF shape: {real_sites_tfidf.shape}")
 
-    joblib.dump(vectorizer, 'data/tfidf_vectorizer_real_site_probability.pkl')
-    combined_data.to_pickle('data/real_sites_features_probability.pkl')
-    print("Data Updated Successfully")
+        joblib.dump(vectorizer, 'data/tfidf_vectorizer_real_site_probability.pkl')
+        combined_data.to_pickle('data/real_sites_features_probability.pkl')
+        print("Data Updated Successfully")
+        return True
+    except Exception as e:
+        print(f"Error updating data: {e}")
+        return False
 
 
 def check_url_list(url: list[str]):
@@ -197,4 +202,9 @@ def check_url_content(url: str, content: str):
 
 def train_new_real_sites(urls: list[str]):
     features = get_features_from_site(urls)
-    append_new_data(features)
+    if not features:
+        return {"status": "error", "message": "Error fetching content from provided URLs", "urls": urls}
+    if append_new_data(features):
+        return {"status": "success", "message": "Training data updated successfully", "urls": urls}
+    else:
+        return {"status": "error", "message": "Error updating training data", "urls": urls}
