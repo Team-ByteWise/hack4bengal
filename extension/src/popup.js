@@ -1,112 +1,67 @@
-'use strict';
+let idx = 0;
 
-import './popup.css';
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.getElementById("Body");
+  const head_img = document.getElementById("head_img");
+  const head_text = document.getElementById("head_text");
+  const enable = document.getElementById("enable");
 
-(function() {
-  // We will make use of Storage API to get and store `count` value
-  // More information on Storage API can we found at
-  // https://developer.chrome.com/extensions/storage
-
-  // To get storage access, we have to mention it in `permissions` property of manifest.json file
-  // More information on Permissions can we found at
-  // https://developer.chrome.com/extensions/declare_permissions
-  const counterStorage = {
-    get: cb => {
-      chrome.storage.sync.get(['count'], result => {
-        cb(result.count);
-      });
-    },
-    set: (value, cb) => {
-      chrome.storage.sync.set(
-        {
-          count: value,
-        },
-        () => {
-          cb();
-        }
-      );
-    },
+  const safeSite = () => {
+    head_img.classList.remove("rotate");
+    body.style.backgroundColor = "#C8FFDB";
+    head_img.src = "images/safe.png";
+    head_text.innerHTML = "This Site is Safe";
+    head_text.style.color = "#20BF55";
+    enable.src = "images/lock.png";
   };
 
-  function setupCounter(initialValue = 0) {
-    document.getElementById('counter').innerHTML = initialValue;
+  const unsafeSite = () => {
+    head_img.classList.remove("rotate");
+    body.style.backgroundColor = "#ECD6D6";
+    head_img.src = "images/not_safe.png";
+    head_text.innerHTML = "Phishing Detected";
+    head_text.style.color = "#DA0000";
+    enable.src = "images/lock.png";
+  };
 
-    document.getElementById('incrementBtn').addEventListener('click', () => {
-      updateCounter({
-        type: 'INCREMENT',
-      });
-    });
+  const disableExtension = () => {
+    head_img.classList.remove("rotate");
+    body.style.backgroundColor = "#B5CFE8";
+    head_img.src = "images/not_enable.png";
+    head_text.innerHTML = "Click to Enable<br />WiseShield Ai";
+    head_text.style.color = "#000000";
+    enable.src = "images/unlock.png";
+  };
 
-    document.getElementById('decrementBtn').addEventListener('click', () => {
-      updateCounter({
-        type: 'DECREMENT',
-      });
-    });
-  }
+  const scanningSite = () => {
+    head_img.classList.add("rotate");
+    body.style.backgroundColor = "#BCE2A4";
+    head_img.src = "images/scanning.png";
+    head_text.innerHTML = "WiseShield Ai is Enabled";
+    head_text.style.color = "#000000";
+    enable.src = "images/lock.png";
+  };
 
-  function updateCounter({ type }) {
-    counterStorage.get(count => {
-      let newCount;
+  function updateUI() {
+    if (++idx >= 4) idx = 0;
 
-      if (type === 'INCREMENT') {
-        newCount = count + 1;
-      } else if (type === 'DECREMENT') {
-        newCount = count - 1;
-      } else {
-        newCount = count;
-      }
-
-      counterStorage.set(newCount, () => {
-        document.getElementById('counter').innerHTML = newCount;
-
-        // Communicate with content script of
-        // active tab by sending a message
-        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-          const tab = tabs[0];
-
-          chrome.tabs.sendMessage(
-            tab.id,
-            {
-              type: 'COUNT',
-              payload: {
-                count: newCount,
-              },
-            },
-            response => {
-              console.log('Current count value passed to contentScript file');
-            }
-          );
-        });
-      });
-    });
-  }
-
-  function restoreCounter() {
-    // Restore count value
-    counterStorage.get(count => {
-      if (typeof count === 'undefined') {
-        // Set counter value as 0
-        counterStorage.set(0, () => {
-          setupCounter(0);
-        });
-      } else {
-        setupCounter(count);
-      }
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', restoreCounter);
-
-  // Communicate with background file by sending a message
-  chrome.runtime.sendMessage(
-    {
-      type: 'GREETINGS',
-      payload: {
-        message: 'Hello, my name is Pop. I am from Popup.',
-      },
-    },
-    response => {
-      console.log(response.message);
+    switch (idx) {
+      case 0:
+        safeSite();
+        break;
+      case 1:
+        scanningSite();
+        break;
+      case 2:
+        unsafeSite();
+        break;
+      case 3:
+        disableExtension();
+        break;
     }
-  );
-})();
+  }
+
+  enable.addEventListener("click", () => {
+    updateUI();
+  });
+});
