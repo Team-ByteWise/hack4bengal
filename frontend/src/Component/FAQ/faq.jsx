@@ -24,11 +24,8 @@ function Faq() {
               legitimate site if you are on a fake one."
         />
         <Accordion
-          title="How does the AI in WiseShield detect phishing websites?"
-          answer="WiseShield's AI uses a technique called cosine similarity to
-              compare the website you are visiting with known legitimate sites.
-              If the similarity is low, it indicates that the site may be a
-              phishing attempt."
+          title="What should I do if the extension detects a phishing website?"
+          answer="If our extension detects a phishing website, it will alert you immediately. You should close the website and avoid entering any personal information. You can also report the site to help improve our detection system."
         />
         <Accordion
           title="How can I tell if a website is safe?"
