@@ -69,7 +69,7 @@ function Hero() {
         </motion.div>
         <span className=" mt-4 text-center text-[18px] text-[#1B134E] font-medium">
           Keep your internet use{" "}
-          <span className="font-bold text-[#4833cc]">safe and private</span>and
+          <span className="font-bold text-[#4833cc]">safe and private</span> and
           your devices running
           <br /> smoothly with one of our award-winning, easy-to-use security
           plans.
@@ -81,6 +81,9 @@ function Hero() {
           whileHover="hover"
           whileTap="tap"
           variants={buttonHover}
+          onClick={() => {
+            window.open("https://github.com/Team-ByteWise/hack4bengal/");
+          }}
           className=" group bg-gradient-to-br from-[#4E37D9] from-20% via-[#4C3EA0] via-40% to-[#19114B] to-90%  text-white text-[22px] font-semibold px-6 py-2 rounded-3xl justify-center items-center flex gap-x-2 "
         >
           <span className="">Get Started</span>

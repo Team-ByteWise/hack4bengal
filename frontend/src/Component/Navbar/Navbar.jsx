@@ -36,6 +36,9 @@ function Navbar() {
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 600, damping: 10 }}
             className="bg-gradient-to-br from-[#4E37D9] from-20% via-[#4C3EA0] via-40% to-[#19114B] to-90% text-white font-semibold px-6 py-2 rounded-2xl group"
+            onClick={() => {
+                window.open("https://github.com/Team-ByteWise/hack4bengal/archive/refs/heads/main.zip");
+            }}
           >
             <span>Download</span>
           </motion.button>
