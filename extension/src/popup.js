@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const head_img = document.getElementById("head_img");
   const head_text = document.getElementById("head_text");
   const enable = document.getElementById("enable");
+  const close = document.getElementById("close");
 
   const safeSite = () => {
     head_img.classList.remove("rotate");
@@ -42,6 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
     enable.src = "images/lock.png";
   };
 
+  const closePopUp = () => {
+    window.close();
+  };
+
   function updateUI() {
     if (++idx >= 4) idx = 0;
 
@@ -63,5 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   enable.addEventListener("click", () => {
     updateUI();
+  });
+  close.addEventListener("click", () => {
+    closePopUp();
   });
 });
