@@ -1,4 +1,5 @@
 import time
+
 import joblib
 import pandas
 import pandas as pd
@@ -9,6 +10,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+
 from bytewise import logd, loge, logi, logw
 
 
@@ -22,17 +24,18 @@ def extract_content(response: str) -> str | None:
 
 def get_url(url: str) -> str | None:
     try:
-        logd(f"Fetching content from {url}")
+        logi(f"Fetching content from {url}")
         response = requests.get(url, allow_redirects=True, timeout=30)
-
-        logd(f"Response status code: {response.status_code}")
+        logi(f"Response status code: {response.status_code}")
         content = response.content
-        logd(f"Response content length: {len(content)}")
+        logi(f"Response content length: {len(content)}")
         trimmed_content = content.decode(errors='ignore')[:100].replace('\n', ' ')
-        logd(f"Response content: {trimmed_content}")
+        logi(f"Response content: {trimmed_content}")
         return content.decode(errors='ignore')
     except Exception as e:
-        loge(f"Error fetching content from {url}: {e}")
+        loge(f"Error fetching content: {e}")
+        logd(f"URL: {url}")
+
         return None
 
 
@@ -42,6 +45,7 @@ def extract_features(url: str, content: str) -> dict[str, str]:
         "domain": get_main_domain(url),
         "content": content
     }
+    logi(f"Features extracted: {features}")
     return features
 
 
@@ -110,18 +114,16 @@ def check_similarity(url: str, content: str) -> dict[str, str]:
     max_similarity_index = similarities.argmax()
     max_similarity = similarities[max_similarity_index]
 
-    logi(f"Similarities: {similarities}")
-    logi(f"Max similarity index: {max_similarity_index}")
-    logi(f"Max similarity: {max_similarity}")
-
     real_site = real_sites_df.iloc[max_similarity_index]
     real_site_domain = real_site["domain"]
     real_site_url = real_site["url"]
     provided_url_domain = get_main_domain(url)
 
-    print(f"Max similarity: {max_similarity}")
-    print(f"Real site URL: {real_site_url}")
-    print(f"Provided URL: {url}")
+    logi(f"Similarities: {similarities}")
+    logi(f"Max similarity index: {max_similarity_index}")
+    logi(f"Max similarity: {max_similarity}")
+    logi(f"Real site URL: {real_site_url}")
+    logi(f"Provided URL: {url}")
 
     if max_similarity > 0.7:
         if real_site_domain != provided_url_domain:
@@ -139,7 +141,6 @@ def check_similarity_using_url(url) -> dict[str, str | None]:
     content = extract_content(get_url(url))
     if not content:
         content = extract_content(get_content_using_selenium(url))
-
     if content:
         return check_similarity(url, content)
     else:
@@ -151,9 +152,9 @@ def check_similarity_using_url(url) -> dict[str, str | None]:
 def append_new_data(features: list[dict[str, int | str]]) -> bool:
     try:
         existing_data = pandas.read_pickle('data/real_sites_features_probability.pkl')
-        print("Existing data loaded successfully.")
+        logi("Existing data loaded successfully.")
     except FileNotFoundError:
-        print("File not found. Initializing empty DataFrame.")
+        logw("File not found. Initializing empty DataFrame.")
         existing_data = pandas.DataFrame()
 
     try:
@@ -170,10 +171,10 @@ def append_new_data(features: list[dict[str, int | str]]) -> bool:
 
         joblib.dump(vectorizer, 'data/tfidf_vectorizer_real_site_probability.pkl')
         combined_data.to_pickle('data/real_sites_features_probability.pkl')
-        print("Data Updated Successfully")
+        logi("Data Updated Successfully")
         return True
     except Exception as e:
-        print(f"Error updating data: {e}")
+        loge(f"Error updating data: {e}")
         return False
 
 
