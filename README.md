@@ -244,6 +244,7 @@ This project is for educational purposes only. The phishing sites are hosted loc
 - [Joblib](https://joblib.readthedocs.io/en/latest/)
 - [Tldextract](https://tldextract.readthedocs.io/en/latest/)
 - [Selenium](https://www.selenium.dev/documentation/en/)
+- [Postman](https://www.postman.com/)
 
 
 ### Chrome Extension
